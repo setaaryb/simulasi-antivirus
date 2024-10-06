@@ -19,12 +19,15 @@
         /* Styling container */
         .container {
             background-color: #ffffff;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             text-align: center;
-            width: 350px;
+            width: 400px;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Styling judul */
@@ -48,6 +51,7 @@
             font-size: 14px;
             margin: 15px 0;
             width: 100%;
+            max-width: 350px;
             border-radius: 6px;
             cursor: pointer;
             transition: border-color 0.3s ease;
@@ -68,6 +72,8 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 350px;
         }
 
         /* Hover pada button */
@@ -83,9 +89,14 @@
         }
 
         /* Styling link file contoh virus */
+        .file-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
         a {
             display: inline-block;
-            margin: 10px 5px;
+            margin: 5px 10px;
             text-decoration: none;
             color: #007bff;
             font-size: 14px;
@@ -101,6 +112,19 @@
         .container:hover {
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
         }
+
+        /* Responsif untuk perangkat lebih kecil */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 20px;
+                box-shadow: none;
+            }
+
+            input[type="file"], button {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -115,6 +139,14 @@
     </form>
 
     <div id="result"></div>
+
+    <div class="file-links">
+        <p>Unduh file contoh virus:</p>
+        <a href="eicar.txt">Eicar.txt</a>
+        <a href="malware.exe">Malware.exe</a>
+        <a href="spyware.bar">Spyware.bar</a>
+        <a href="trojan.bat">Trojan.bat</a>
+    </div>
 </div>
 
 <script>
@@ -139,13 +171,6 @@
         }
     }
 </script>
-
-<p>
-    <a href="eicar.txt">Unduh Eicar.txt</a>
-    <a href="malware.exe">Unduh Malware.exe</a>
-    <a href="spyware.bar">Unduh Spyware.bar</a>
-    <a href="trojan.bat">Unduh Trojan.bat</a>
-</p>
 
 </body>
 </html>
