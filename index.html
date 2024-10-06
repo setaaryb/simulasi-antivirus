@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Virus Scanner</title>
     <style>
+        /* Mengatur font dasar dan latar belakang */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,45 +16,90 @@
             margin: 0;
         }
 
+        /* Styling container */
         .container {
             background-color: #ffffff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             text-align: center;
-            width: 300px;
+            width: 350px;
+            transition: all 0.3s ease;
         }
 
+        /* Styling judul */
         h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: #333;
+            margin-bottom: 10px;
         }
 
+        /* Styling paragraf */
         p {
-            color: #666;
-            font-size: 14px;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
+        /* Styling input file */
         input[type="file"] {
-            margin: 10px 0;
+            border: 2px dashed #ced4da;
+            padding: 10px;
+            font-size: 14px;
+            margin: 15px 0;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
         }
 
+        /* Hover pada input file */
+        input[type="file"]:hover {
+            border-color: #28a745;
+        }
+
+        /* Styling button */
         button {
             background-color: #28a745;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
+        /* Hover pada button */
         button:hover {
             background-color: #218838;
         }
 
+        /* Hasil pemindaian */
         #result {
             margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Styling link file contoh virus */
+        a {
+            display: inline-block;
+            margin: 10px 5px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover pada link */
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Menambahkan animasi hover pada container */
+        .container:hover {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -93,11 +139,12 @@
         }
     }
 </script>
+
 <p>
-<a href="eicar.txt">Mentahan Virus Eicar.txt</a>
-<a href="malware.exe">Mentahan Virus Malware.exe</a>
-<a href="spyware.bar">Mentahan virus Spyware.bar</a>
-<a href="trojan.bat">Mentahan Virus Trojan.bat</a>
+    <a href="eicar.txt">Unduh Eicar.txt</a>
+    <a href="malware.exe">Unduh Malware.exe</a>
+    <a href="spyware.bar">Unduh Spyware.bar</a>
+    <a href="trojan.bat">Unduh Trojan.bat</a>
 </p>
 
 </body>
