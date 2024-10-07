@@ -1,176 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Virus Scanner</title>
-    <style>
-        /* Mengatur font dasar dan latar belakang */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Antivirus Simulation</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f4f8;
+    }
 
-        /* Styling container */
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-            width: 400px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 400px;
+      text-align: center;
+    }
 
-        /* Styling judul */
-        h1 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
-        }
+    h1 {
+      font-size: 28px;
+      color: #333;
+    }
 
-        /* Styling paragraf */
-        p {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+    .description {
+      font-size: 16px;
+      color: #777;
+      margin-bottom: 20px;
+    }
 
-        /* Styling input file */
-        input[type="file"] {
-            border: 2px dashed #ced4da;
-            padding: 10px;
-            font-size: 14px;
-            margin: 15px 0;
-            width: 100%;
-            max-width: 350px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: border-color 0.3s ease;
-        }
+    .scan-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+    }
 
-        /* Hover pada input file */
-        input[type="file"]:hover {
-            border-color: #28a745;
-        }
+    .scan-btn:hover {
+      background-color: #45a049;
+    }
 
-        /* Styling button */
-        button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            max-width: 350px;
-        }
+    .scan-status {
+      font-size: 18px;
+      color: #3498db;
+      margin-bottom: 10px;
+    }
 
-        /* Hover pada button */
-        button:hover {
-            background-color: #218838;
-        }
+    .file-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px;
+    }
 
-        /* Hasil pemindaian */
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
+    .file-list li {
+      padding: 8px;
+      background-color: #f9f9f9;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        /* Styling link file contoh virus */
-        .file-links {
-            margin-top: 20px;
-            text-align: center;
-        }
+    .file-list .clean {
+      color: #27ae60;
+    }
 
-        a {
-            display: inline-block;
-            margin: 5px 10px;
-            text-decoration: none;
-            color: #007bff;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
+    .file-list .infected {
+      color: #e74c3c;
+    }
 
-        /* Hover pada link */
-        a:hover {
-            color: #0056b3;
-        }
+    .progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      margin-bottom: 20px;
+      height: 24px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
 
-        /* Menambahkan animasi hover pada container */
-        .container:hover {
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-        }
+    .progress-bar-fill {
+      width: 0;
+      height: 100%;
+      background-color: #4CAF50;
+      transition: width 0.5s;
+    }
 
-        /* Responsif untuk perangkat lebih kecil */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 20px;
-                box-shadow: none;
-            }
+    .results-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
 
-            input[type="file"], button {
-                max-width: 100%;
-            }
-        }
-    </style>
+    .results-table th, .results-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .results-table th {
+      background-color: #f4f4f4;
+    }
+
+    .results-table td.clean {
+      color: #27ae60;
+    }
+
+    .results-table td.infected {
+      color: #e74c3c;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Virus Scanner</h1>
-    <p>Pilih file untuk dipindai dari virus</p>
+  <div class="container">
+    <h1>Advanced Antivirus Simulation</h1>
+    <p class="description">Click the button below to simulate a virus scan on multiple files.</p>
 
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="fileInput" accept="*" />
-        <button type="button" onclick="scanFile()">Scan File</button>
-    </form>
+    <button class="scan-btn" onclick="startScan()">Start Scan</button>
 
-    <div id="result"></div>
+    <div class="scan-status" id="scan-status"></div>
 
-    <div class="file-links">
-        <p>Unduh file contoh virus:</p>
-        <a href="eicar.txt">Eicar.txt</a>
-        <a href="malware.exe">Malware.exe</a>
-        <a href="spyware.bar">Spyware.bar</a>
-        <a href="trojan.bat">Trojan.bat</a>
+    <ul class="file-list" id="file-list"></ul>
+
+    <div class="progress-bar">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
     </div>
-</div>
 
-<script>
-    function scanFile() {
-        let fileInput = document.getElementById('fileInput');
-        let file = fileInput.files[0];
-        let resultDiv = document.getElementById('result');
-        
-        if (!file) {
-            resultDiv.innerHTML = "<p style='color: red;'>Please select a file to scan.</p>";
-            return;
-        }
+    <table class="results-table" id="results-table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="results-body">
+      </tbody>
+    </table>
+  </div>
 
-        // List of 'malicious' files for testing
-        const maliciousFiles = ['eicar.txt', 'malware.exe', 'spyware.bar', 'trojan.bat'];
+  <script>
+    const files = [
+      'file1.txt', 
+      'file2.exe', 
+      'file3.doc', 
+      'file4.jpg', 
+      'file5.mp4'
+    ];
 
-        // Check if file name exists in the maliciousFiles array
-        if (maliciousFiles.includes(file.name.toLowerCase())) {
-            resultDiv.innerHTML = "<p style='color: red;'><strong>Terdeteksi Virus!</strong></p>";
-        } else {
-            resultDiv.innerHTML = "<p style='color: green;'>Tidak Terdeteksi Virus.</p>";
-        }
+    let currentFileIndex = 0;
+    const scanResults = [];
+
+    function startScan() {
+      currentFileIndex = 0;
+      scanResults.length = 0;
+      document.getElementById('scan-status').innerHTML = "Scanning in progress...";
+      document.getElementById('file-list').innerHTML = "";
+      document.getElementById('results-body').innerHTML = "";
+      document.getElementById('progress-bar-fill').style.width = "0";
+      
+      scanFile();
     }
-</script>
+
+    function scanFile() {
+      if (currentFileIndex < files.length) {
+        const fileName = files[currentFileIndex];
+        const fileList = document.getElementById('file-list');
+        const listItem = document.createElement('li');
+        listItem.textContent = fileName + " - Scanning...";
+        fileList.appendChild(listItem);
+
+        setTimeout(() => {
+          const infected = Math.random() < 0.4; // 40% chance the file is infected
+          listItem.textContent = fileName + (infected ? " - Infected" : " - Clean");
+          listItem.classList.add(infected ? 'infected' : 'clean');
+
+          scanResults.push({
+            fileName: fileName,
+            status: infected ? "Infected" : "Clean"
+          });
+
+          // Update progress bar
+          const progressBarFill = document.getElementById('progress-bar-fill');
+          progressBarFill.style.width = ((currentFileIndex + 1) / files.length) * 100 + "%";
+
+          currentFileIndex++;
+          scanFile(); // Move to the next file
+
+        }, 1000); // Simulate 1 second scan per file
+      } else {
+        document.getElementById('scan-status').innerHTML = "Scan Complete";
+        displayResults();
+      }
+    }
+
+    function displayResults() {
+      const resultsBody = document.getElementById('results-body');
+      scanResults.forEach(result => {
+        const row = document.createElement('tr');
+        const fileNameCell = document.createElement('td');
+        const statusCell = document.createElement('td');
+
+        fileNameCell.textContent = result.fileName;
+        statusCell.textContent = result.status;
+        statusCell.classList.add(result.status.toLowerCase());
+
+        row.appendChild(fileNameCell);
+        row.appendChild(statusCell);
+        resultsBody.appendChild(row);
+      });
+    }
+  </script>
 
 </body>
 </html>
